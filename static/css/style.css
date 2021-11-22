@@ -63,3 +63,74 @@ header ul a {
 header ul a:hover {
   border-bottom: 0.3rem solid;
 }
+
+/* Forms */
+.form-content .container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.form-content .container > div {
+  margin-top: 2rem;
+  padding: 2rem;
+  border: 0.1rem solid #c2c2c2;
+  border-radius: 0.5rem;
+  box-shadow: 0 0 0.5rem rgba(0, 0, 0, 0.2);
+  min-width: 50rem;
+}
+
+.form-content .container h1 {
+  color: var(--primary-color);
+}
+
+.form-group {
+  margin: 1.5rem 0 2rem;
+}
+
+label {
+  font-size: 2rem;
+  font-weight: bold;
+  text-transform: uppercase;
+}
+
+input {
+  margin-top: 0.5rem;
+  padding: 0.5rem;
+  width: 100%;
+  font-size: 1.8rem;
+  line-height: 1.5;
+}
+
+input:focus {
+  outline-color: var(--primary-color);
+}
+
+.form-buttons {
+  margin-bottom: 1.5rem;
+}
+
+button {
+  border: none;
+  padding: 1rem 2rem;
+  font-weight: bold;
+  text-transform: uppercase;
+  cursor: pointer;
+}
+
+button[type="submit"] {
+  background-color: var(--primary-color);
+  color: #fff;
+}
+
+.messages {
+  margin-top: 1rem;
+  list-style: none;
+}
+
+.messages .error {
+  padding: 1rem 0.5rem;
+  background-color: #ff5e5e;
+  font-weight: bold;
+  color: #fff;
+}

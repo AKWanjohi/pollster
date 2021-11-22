@@ -1,0 +1,37 @@
+{% extends 'base.html' %}
+
+{% block title %}| Login{% endblock title %}
+
+{% block content %}
+<main class='form-content'>
+    <div class="container">
+        <div>
+            <h1>Login</h1>
+            <hr>
+            <form method="POST" autocomplete='off'>
+            {% if messages %}
+                <ul class="messages">
+                    {% for message in messages %}
+                        <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+                    {% endfor %}
+                </ul>
+            {% endif %}
+            {% csrf_token %}
+                <div class="form-group">
+                    <label for="email">Email</label>
+                    <input type="email" name="email" id="email" placeholder="Enter your email address" required>
+                </div>
+                <div class="form-group">
+                    <label for="password">Password</label>
+                    <input type="password" name="password" id="password" placeholder="Enter your password" required>
+                </div>
+                <div class="form-buttons">
+                    <button type='reset'>Reset</button>
+                    <button type='submit'>Login</button>
+                </div>
+            </form>
+            <p>Don't have an account yet? <a href="{% url 'register' %}">Sign Up</a></p>
+        </div>
+    </div>
+</main>
+{% endblock content %}
