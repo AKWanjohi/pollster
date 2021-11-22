@@ -1,0 +1,3 @@
+.vscode/settings.json
+polls/__pycache__/*
+pollster/__pycache__/*
