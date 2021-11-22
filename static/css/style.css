@@ -1,3 +1,7 @@
+:root {
+  --primary-color: #7602a8;
+}
+
 * {
   margin: 0;
   padding: 0;
@@ -12,4 +16,50 @@ body {
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
     Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
   font-size: 1.6rem;
+}
+
+.container {
+  max-width: 1140px;
+  margin: auto;
+}
+
+/* Header */
+header {
+  background-color: var(--primary-color);
+  padding: 2rem 0;
+}
+
+header .container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.logo {
+  font-size: 3rem;
+}
+
+header a {
+  font-size: 1.8rem;
+  font-weight: bold;
+  text-decoration: none;
+  text-transform: uppercase;
+  color: #fff;
+}
+
+header ul {
+  list-style: none;
+  display: flex;
+}
+
+header ul li {
+  padding: 0 1rem;
+}
+
+header ul a {
+  padding: 0.4rem 0;
+}
+
+header ul a:hover {
+  border-bottom: 0.3rem solid;
 }
