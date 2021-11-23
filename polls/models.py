@@ -5,6 +5,9 @@ from django.db.models.deletion import CASCADE, SET_NULL
 
 class User(AbstractUser):
     email = models.EmailField(unique=True)
+    bio = models.TextField(null=True, blank=True)
+    avatar = models.ImageField(
+        null=True, default='avatar.svg', upload_to='profile_pics')
 
     USERNAME_FIELD = 'email'
     REQUIRED_FIELDS = ['username']
