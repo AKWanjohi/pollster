@@ -17,18 +17,26 @@
                 <div class="poll-body">
                     <p>{{poll.question_text}}</p>
                 </div>
-                <form method='POST'>
-                    {% csrf_token %}
+                {% if voted_poll %}
+                    <div class="poll-results">
+                        {% for choice in poll.choice_set.all %}
+                            <p>{{choice.choice_text}} -- <span>{{choice.votes}}</span> vote{{choice.votes|pluralize}}</p>
+                        {% endfor %}
+                    </div>
+                {% else %}
+                    <form method='POST'>
+                        {% csrf_token %}
 
-                    {% for choice in poll.choice_set.all %}
-                        <div class="form-group">
-                            <input type="radio" name="choice" id="choice{{forloop.counter}}" value='{{choice.id}}' required>
-                            <label for="choice{{forloop.counter}}">{{choice.choice_text}}</label>
-                        </div>
-                    {% endfor %}
-                    <hr>
-                    <div class="form-button"><button type='submit'>Vote</button></div>
-                </form>
+                        {% for choice in poll.choice_set.all %}
+                            <div class="form-group">
+                                <input type="radio" name="choice" id="choice{{forloop.counter}}" value='{{choice.id}}' required>
+                                <label for="choice{{forloop.counter}}">{{choice.choice_text}}</label>
+                            </div>
+                        {% endfor %}
+                        <hr>
+                        <div class="form-button"><button type='submit'>Vote</button></div>
+                    </form>
+                {% endif %}
             </div>
         </div>
     </main>

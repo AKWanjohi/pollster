@@ -87,8 +87,6 @@ def poll(request, poll_id):
     poll = Question.objects.get(id=poll_id)
     voted_poll = QuestionVoter.objects.filter(
         question=poll, voter=request.user)
-    if voted_poll:
-        return redirect(results, poll_id=poll.id)
 
     if request.method == 'POST':
         selected_choice = poll.choice_set.get(pk=request.POST.get('choice'))
@@ -101,17 +99,8 @@ def poll(request, poll_id):
         voter = QuestionVoter.objects.create(question=poll, voter=request.user)
         voter.save()
 
-        return redirect(results, poll_id=poll.id)
-
-    context = {"poll": poll}
+    context = {"poll": poll, 'voted_poll': voted_poll}
     return render(request, 'poll.html', context)
-
-
-@login_required(login_url='login')
-def results(request, poll_id):
-    poll = Question.objects.get(id=poll_id)
-    context = {'poll': poll}
-    return render(request, 'results.html', context)
 
 
 @login_required(login_url='login')
