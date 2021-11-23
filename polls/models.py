@@ -28,7 +28,7 @@ class Question(models.Model):
     total_votes = models.IntegerField(default=0)
 
     class Meta:
-        ordering = ['created']
+        ordering = ['-created']
 
     def __str__(self):
         return self.question_text
