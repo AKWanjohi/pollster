@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+
+{% block title %}| Poll{% endblock title %}
+
+{% block content %}
+    <main class="poll-content">
+        <div class="container">
+            <div class="action-buttons">
+                <a href="{{request.META.HTTP_REFERER}}" class="back-button">Back</a>
+            </div>
+            <div class="poll">
+                <div class="poll-header">
+                    <a href="">@{{poll.creator}}</a>
+                    <p>{{poll.created|timesince}} ago</p>
+                </div>
+                <hr>
+                <div class="poll-body">
+                    <p>{{poll.question_text}}</p>
+                </div>
+                <form method='POST'>
+                    {% csrf_token %}
+
+                    {% for choice in poll.choice_set.all %}
+                        <div class="form-group">
+                            <input type="radio" name="choice" id="choice{{forloop.counter}}" value='{{choice.id}}' required>
+                            <label for="choice{{forloop.counter}}">{{choice.choice_text}}</label>
+                        </div>
+                    {% endfor %}
+                    <hr>
+                    <div class="form-button"><button type='submit'>Vote</button></div>
+                </form>
+            </div>
+        </div>
+    </main>
+{% endblock content %}

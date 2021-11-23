@@ -1,5 +1,6 @@
 :root {
   --primary-color: #7602a8;
+  --accent-color: #b046dd;
 }
 
 * {
@@ -131,8 +132,12 @@ button {
 }
 
 button[type="submit"] {
-  background-color: var(--primary-color);
+  background-color: var(--accent-color);
   color: #fff;
+}
+
+button[type="submit"]:hover {
+  background-color: var(--primary-color);
 }
 
 .messages {
@@ -223,8 +228,16 @@ button[type="submit"] {
   font-size: 1.8rem;
 }
 
+.homepage-content .no-polls {
+  padding: 1rem;
+  border: 0.1rem solid #c2c2c2;
+  border-radius: 0.5rem;
+  box-shadow: 0 0 0.5rem rgba(0, 0, 0, 0.2);
+}
+
 /* Voting Page */
 .poll-content .poll {
+  margin: auto;
   max-width: 60rem;
   padding: 1rem;
   border: 0.2rem solid #c2c2c2;
@@ -248,6 +261,10 @@ button[type="submit"] {
   font-size: 3rem;
 }
 
+.poll-content .poll-body p {
+  font-weight: bold;
+}
+
 .poll-content input {
   width: max-content;
 }
@@ -268,8 +285,9 @@ button[type="submit"] {
   border-radius: 0.5rem;
 }
 
-/* Topics */
-.topics-body {
+/* Topics and Activities*/
+.topics-body,
+.activities-body {
   height: max-content;
   padding: 1rem;
   border: 0.1rem solid #c2c2c2;
@@ -277,27 +295,42 @@ button[type="submit"] {
   box-shadow: 0 0 0.5rem rgba(0, 0, 0, 0.2);
 }
 
-.topics h2 {
+.topics h2,
+.activities h2 {
   margin-bottom: 1.5rem;
   font-size: 2.2rem;
   text-transform: uppercase;
   color: var(--primary-color);
 }
 
-.topics a {
+.topics a,
+.activities a {
   text-decoration: none;
 }
 .topics div {
   margin-bottom: 2rem;
 }
 
-.topics-list {
+.topics-list,
+.activities-list {
   margin-top: 1.5rem;
   list-style: none;
 }
 
-.topics-list li {
-  margin-bottom: 1.5rem;
+.topics-list li,
+.activities-list li {
+  margin-block: 1.5rem;
+}
+
+.activities-list li {
+  font-weight: bold;
+  text-transform: uppercase;
+}
+
+li.no-activity,
+li.not-logged-in {
+  font-weight: normal;
+  text-transform: none;
 }
 
 .topics-list li.active {
@@ -316,13 +349,61 @@ button[type="submit"] {
   color: initial;
 }
 
-.topics-list a:hover {
+.activities-list a {
+  font-weight: normal;
+  text-transform: none;
+  color: initial;
+}
+
+.topics-list a:hover,
+.activities-list a:hover {
+  font-weight: bold;
   color: var(--primary-color);
 }
 
 .topics-list a span,
 .more-button {
-  padding: 1rem;
-  background-color: var(--primary-color);
+  padding: 0.5rem 1.5rem;
+  background-color: var(--accent-color);
   color: #fff;
+}
+
+a.login-link {
+  font-weight: bold;
+  color: var(--accent-color);
+}
+
+.login-link:hover {
+  text-decoration: underline;
+  color: var(--primary-color);
+}
+
+/* Poll Page */
+.action-buttons {
+  margin-bottom: 2rem;
+}
+
+.back-button {
+  display: inline-block;
+  padding: 1rem 2rem;
+  background-color: var(--accent-color);
+  border-radius: 0.5rem;
+  text-transform: uppercase;
+  text-decoration: none;
+  color: #fff;
+}
+
+.back-button:hover {
+  background-color: var(--primary-color);
+  font-weight: bold;
+}
+
+/* Results Page */
+.poll-results {
+  margin-top: 1.5rem;
+}
+
+.poll-results span {
+  font-weight: bold;
+  color: var(--primary-color);
 }

@@ -40,7 +40,7 @@
                 {% if polls or voted_polls %}
                     {% if voted_polls %}
                         {% if voted_polls.count is all_polls.count %}
-                            <p>No new polls.</p>
+                            <p class="no-polls">No new polls.</p>
                         {% else %}
                             {% for poll in polls %}
                                 <div class='poll'>
@@ -84,11 +84,32 @@
                         {% endfor %}
                     {% endif %}
                 {% else %}
-                    <p>No polls available.</p>
+                    <p class="no-polls">No polls available.</p>
                 {% endif %}
             </div>
 
-            <div class="activities"></div>
+            <div class="activities">
+                <h2>Recent Activities</h2>
+                <div class="activities-body">
+                    <ul class="activities-list">
+                        {% if request.user.is_authenticated %}
+                            {% if voted_polls %}
+                                {% for poll in voted_polls|slice:10 %}
+                                    <li>
+                                        Poll: 
+                                        <a href="{% url 'poll' poll.question.id %}">{{poll.question.question_text}}</a>
+                                    </li>
+                                    <hr>
+                                {% endfor %}
+                            {% else %}
+                                <li class="no-activity">No recent activity matching search</li>
+                            {% endif %}
+                        {% else %}
+                            <li class="not-logged-in">Please <a href="{% url 'login' %}" class="login-link">login</a> to view recent activities</li>
+                        {% endif %}
+                    </ul>
+                </div>
+            </div>
         </div>
     </main>
 {% endblock content %}

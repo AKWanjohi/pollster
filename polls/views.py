@@ -80,3 +80,35 @@ def register(request):
 def logout(request):
     auth_logout(request)
     return redirect('home')
+
+
+@login_required(login_url='login')
+def poll(request, poll_id):
+    poll = Question.objects.get(id=poll_id)
+    voted_poll = QuestionVoter.objects.filter(
+        question=poll, voter=request.user)
+    if voted_poll:
+        return redirect(results, poll_id=poll.id)
+
+    if request.method == 'POST':
+        selected_choice = poll.choice_set.get(pk=request.POST.get('choice'))
+        selected_choice.votes += 1
+        selected_choice.save()
+
+        poll.total_votes += selected_choice.votes
+        poll.save()
+
+        voter = QuestionVoter.objects.create(question=poll, voter=request.user)
+        voter.save()
+
+        return redirect(results, poll_id=poll.id)
+
+    context = {"poll": poll}
+    return render(request, 'poll.html', context)
+
+
+@login_required(login_url='login')
+def results(request, poll_id):
+    poll = Question.objects.get(id=poll_id)
+    context = {'poll': poll}
+    return render(request, 'results.html', context)
