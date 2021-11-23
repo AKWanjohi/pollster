@@ -1,0 +1,41 @@
+{% extends 'base.html' %}
+
+{% block title %}| Create Poll{% endblock title %}
+
+{% block content %}
+    <main class="create-poll-content">
+        <div class="container">
+            <div class="action-buttons">
+                <a href="{{request.META.HTTP_REFERER}}" class="back-button">Back</a>
+            </div>
+            <div class="create-poll">
+                <h1>Create Poll</h1>
+                <hr>
+                <form method="POST">
+                    {% csrf_token %}
+                    <div class="form-group">
+                        <label for="poll_question">Poll Question</label>
+                        <textarea name="poll_question" id="poll_question" placeholder="Enter your question" required></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label for="poll_choices">Poll Choices</label>
+                        <textarea name="poll_choices" id="poll_choices" placeholder="Enter choices separated by a comma" required></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label for="topic_name">Topic Name</label>
+                        <input type="text" name="topic_name" id="topic_name" placeholder="Enter poll topic" list="topic_list" required>
+                    </div>
+                    <datalist id="topic_list">
+                        {% for topic in topics %}
+                            <option value="{{topic.name}}">{{topic.name}}</option>
+                        {% endfor %}
+                    </datalist>
+                    <div class="form-buttons">
+                        <button type='reset'>Reset</button>
+                        <button type='submit'>Create</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </main>
+{% endblock content %}

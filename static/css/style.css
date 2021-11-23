@@ -26,6 +26,7 @@ body {
 
 main {
   margin-top: 2rem;
+  margin-bottom: 5rem;
 }
 
 /* Header */
@@ -102,21 +103,27 @@ header ul a:hover {
 }
 
 label {
-  font-size: 2rem;
+  font-size: 1.8rem;
   font-weight: bold;
   text-transform: uppercase;
 }
 
-input {
+input,
+textarea {
   margin-top: 0.5rem;
   padding: 0.5rem;
   width: 100%;
-  font-size: 1.8rem;
   line-height: 1.5;
 }
 
-input:focus {
+input:focus,
+textarea:focus {
   outline-color: var(--primary-color);
+}
+
+textarea {
+  min-height: 10rem;
+  resize: none;
 }
 
 .form-buttons {
@@ -126,6 +133,7 @@ input:focus {
 button {
   border: none;
   padding: 1rem 2rem;
+  font-size: 1.4rem;
   font-weight: bold;
   text-transform: uppercase;
   cursor: pointer;
@@ -217,11 +225,16 @@ button[type="submit"]:hover {
 
 .homepage-content .poll-create {
   padding: 1.5rem 2rem;
-  background-color: #b046dd;
+  background-color: var(--accent-color);
   border-radius: 1rem;
   text-decoration: none;
   text-transform: uppercase;
   color: #fff;
+}
+
+.homepage-content .poll-create:hover {
+  background-color: var(--primary-color);
+  font-weight: bold;
 }
 
 .homepage-content .polls-count {
@@ -380,7 +393,7 @@ a.login-link {
 
 /* Poll Page */
 .action-buttons {
-  margin-bottom: 2rem;
+  margin-bottom: 1rem;
 }
 
 .back-button {
@@ -405,5 +418,20 @@ a.login-link {
 
 .poll-results span {
   font-weight: bold;
+  color: var(--primary-color);
+}
+
+/* Create Poll Page */
+.create-poll {
+  width: 60rem;
+  margin: auto;
+  padding: 1rem;
+  border: 0.1rem solid #c2c2c2;
+  border-radius: 0.5rem;
+  box-shadow: 0 0 0.5rem rgba(0, 0, 0, 0.2);
+}
+
+.create-poll h1 {
+  margin-block: 0.5rem;
   color: var(--primary-color);
 }

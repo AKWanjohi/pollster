@@ -34,7 +34,7 @@
                             <p class='polls-count'>{{polls.count}} poll{{polls.count|pluralize}} avaliable</p>
                         {% endif %}
                     </div>
-                    <a href="" class='poll-create'>Create Poll</a>
+                    <a href="{% url 'create-poll' %}" class='poll-create'>Create Poll</a>
                 </div>
 
                 {% if polls or voted_polls %}

@@ -3,7 +3,7 @@ from django.contrib import messages
 from django.contrib.auth import authenticate, login as auth_login, logout as auth_logout
 from django.contrib.auth.decorators import login_required
 from django.db.models import Q
-from .models import QuestionVoter, Topic, User, Question, QuestionVoter
+from .models import Choice, QuestionVoter, Topic, User, Question, QuestionVoter
 
 
 def home(request):
@@ -112,3 +112,29 @@ def results(request, poll_id):
     poll = Question.objects.get(id=poll_id)
     context = {'poll': poll}
     return render(request, 'results.html', context)
+
+
+@login_required(login_url='login')
+def create_poll(request):
+    if request.method == "POST":
+        poll_question = request.POST.get('poll_question')
+        topic_name = request.POST.get('topic_name')
+        topic = Topic.objects.get(name=topic_name)
+
+        poll_choices = []
+        choices = request.POST.get('poll_choices')
+        choices_list = choices.split(',')
+        for choice in choices_list:
+            poll_choices.append(choice.strip())
+
+        question = Question.objects.create(
+            creator=request.user, question_text=poll_question, topic=topic)
+        question.save()
+
+        for choice in poll_choices:
+            choice = question.choice_set.create(choice_text=choice)
+            choice.save()
+
+        return redirect('home')
+    topics = Topic.objects.all()
+    return render(request, 'create_poll.html', {'topics': topics})
