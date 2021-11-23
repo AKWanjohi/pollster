@@ -1,4 +1,4 @@
 .vscode/settings.json
 polls/__pycache__/*
 pollster/__pycache__/*
-polls/migrations/*
+polls/migrations/__pycache__/*
