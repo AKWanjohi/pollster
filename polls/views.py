@@ -1,11 +1,40 @@
 from django.shortcuts import render, redirect
 from django.contrib import messages
 from django.contrib.auth import authenticate, login as auth_login, logout as auth_logout
-from .models import User
+from django.contrib.auth.decorators import login_required
+from django.db.models import Q
+from .models import QuestionVoter, Topic, User, Question, QuestionVoter
 
 
 def home(request):
-    return render(request, 'index.html')
+    q = request.GET.get('q') if request.GET.get('q') != None else ""
+
+    topics = Topic.objects.all()[:5]
+
+    polls = Question.objects.filter(
+        Q(topic__name__icontains=q) | Q(question_text__icontains=q))
+    polls_list = list(polls)
+
+    if request.user.is_authenticated:
+        voted_polls = QuestionVoter.objects.filter(voter=request.user).filter(
+            Q(question__question_text__icontains=q) | Q(question__topic__name__icontains=q))
+        for poll in voted_polls:
+            if poll.question in polls_list:
+                polls_list.remove(poll.question)
+    else:
+        voted_polls = []
+
+    if voted_polls:
+        if len(polls_list):
+            polls_count = len(polls) - len(voted_polls)
+        else:
+            polls_count = 0
+        context = {'topics': topics, 'polls': polls_list, 'voted_polls': voted_polls, 'all_polls': polls,
+                   'polls_count': polls_count}
+    else:
+        context = {'topics': topics, 'polls': polls}
+
+    return render(request, 'index.html', context)
 
 
 def login(request):
