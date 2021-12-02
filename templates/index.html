@@ -5,24 +5,7 @@
 {% block content %}
     <main class="homepage-content">
         <div class="container">
-            <div class="topics">
-                <h2>Browse Topics</h2>
-                <div class="topics-body">
-                    <ul class="topics-list">
-                        <li {% if request.GET.q is None %}class="active"{% endif %}>
-                            <a href="{% url 'home' %}">All <span>{{topics.count}}</span></a>
-                        </li>
-                        {% for topic in topics %}
-                            <li {% if request.GET.q == topic.name %}class="active"{% endif %}>
-                                <a href="{% url 'home' %}?q={{topic.name}}">{{topic.name}} <span>{{topic.question_set.all.count}}</span></a>
-                            </li>
-                        {% endfor %}
-                    </ul>
-                    <div>
-                        <a href="" class="more-button">More</a>
-                    </div>
-                </div>
-            </div>
+            {% include 'components/topics.html' %}
 
             <div class="polls">
                 <div class="polls-header">
@@ -42,74 +25,17 @@
                         {% if voted_polls.count is all_polls.count %}
                             <p class="no-polls">No new polls.</p>
                         {% else %}
-                            {% for poll in polls %}
-                                <div class='poll'>
-                                    <div class="poll-header">
-                                        <a href="">@{{poll.creator}}</a>
-                                        <p>{{poll.created|timesince}} ago</p>
-                                    </div>
-                                    <hr>
-                                    <div class="poll-body">
-                                        <p><a href="{% url 'poll' poll.id %}" class='poll-question'>{{poll.question_text}}</a></p>
-                                    </div>
-                                    <hr>
-                                    <div class="poll-footer">
-                                        <p>
-                                            {{poll.total_votes}} vote{{poll.total_votes|pluralize}}
-                                        </p>
-                                        <p class='poll-topic'>{{poll.topic}}</p>
-                                    </div>
-                                </div>
-                            {% endfor %}
+                            {% include 'components/polls.html' %}
                         {% endif %}
                     {% else %}
-                        {% for poll in polls %}
-                            <div class='poll'>
-                                <div class="poll-header">
-                                    <a href="">@{{poll.creator}}</a>
-                                    <p>{{poll.created|timesince}} ago</p>
-                                </div>
-                                <hr>
-                                <div class="poll-body">
-                                    <p><a href="{% url 'poll' poll.id %}" class='poll-question'>{{poll.question_text}}</a></p>
-                                </div>
-                                <hr>
-                                <div class="poll-footer">
-                                    <p>
-                                        {{poll.total_votes}} vote{{poll.total_votes|pluralize}}
-                                    </p>
-                                    <p class='poll-topic'>{{poll.topic}}</p>
-                                </div>
-                            </div>
-                        {% endfor %}
+                        {% include 'components/polls.html' %}
                     {% endif %}
                 {% else %}
                     <p class="no-polls">No polls available.</p>
                 {% endif %}
             </div>
 
-            <div class="activities">
-                <h2>Recent Activities</h2>
-                <div class="activities-body">
-                    <ul class="activities-list">
-                        {% if request.user.is_authenticated %}
-                            {% if voted_polls %}
-                                {% for poll in voted_polls|slice:10 %}
-                                    <li>
-                                        Poll: 
-                                        <a href="{% url 'poll' poll.question.id %}">{{poll.question.question_text}}</a>
-                                    </li>
-                                    <hr>
-                                {% endfor %}
-                            {% else %}
-                                <li class="no-activity">No recent activity matching search</li>
-                            {% endif %}
-                        {% else %}
-                            <li class="not-logged-in">Please <a href="{% url 'login' %}" class="login-link">login</a> to view recent activities</li>
-                        {% endif %}
-                    </ul>
-                </div>
-            </div>
+            {% include 'components/activities.html' %}
         </div>
     </main>
 {% endblock content %}

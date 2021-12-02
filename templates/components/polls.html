@@ -1,0 +1,22 @@
+{% for poll in polls %}
+    <div class='poll'>
+        <div class="poll-header">
+            <div class="user">
+                <img src="{{poll.creator.avatar.url}}" alt="Poll creator profile picture">
+                <a href="">@{{poll.creator}}</a>
+            </div>
+            <p class="poll-created-time">{{poll.created|timesince}} ago</p>
+        </div>
+        <hr>
+        <div class="poll-body">
+            <p><a href="{% url 'poll' poll.id %}" class='poll-question'>{{poll.question_text}}</a></p>
+        </div>
+        <hr>
+        <div class="poll-footer">
+            <p>
+                <i class="fas fa-comment"></i>{{poll.total_votes}} vote{{poll.total_votes|pluralize}}
+            </p>
+            <p class='poll-topic'>{{poll.topic}}</p>
+        </div>
+    </div>
+{% endfor %}

@@ -1,0 +1,27 @@
+<div class="activities">
+    <h2>Recent Activities</h2>
+    <div class="activities-body">
+        <ul class="activities-list">
+            {% if request.user.is_authenticated %}
+                {% if request.GET.q %}
+                    <p class="activity-info">Activities matching {{request.GET.q}}</p>
+                {% else %}
+                    <p class="activity-info">All recent activity</p>
+                {% endif %}
+                {% if voted_polls %}
+                    {% for poll in voted_polls|slice:10 %}
+                        <li>
+                            Poll: 
+                            <a href="{% url 'poll' poll.question.id %}">{{poll.question.question_text}}</a>
+                        </li>
+                        <hr>
+                    {% endfor %}
+                {% else %}
+                    <li class="no-activity">No recent activity matching search</li>
+                {% endif %}
+            {% else %}
+                <li class="not-logged-in">Please <a href="{% url 'login' %}" class="login-link">login</a> to view recent activities</li>
+            {% endif %}
+        </ul>
+    </div>
+</div>
