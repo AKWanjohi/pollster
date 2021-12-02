@@ -2,7 +2,7 @@
     <div class="container">
         <a href="{% url 'home' %}" class="logo">Pollster</a>
         <form action="{{request.path}}" class="search-form">
-            <input type="search" name="q" placeholder="Search for topics or polls...">
+            <input type="search" name="q" value="{{request.GET.q}}" placeholder="Search for topics or polls...">
         </form>
         <nav>
             <ul>

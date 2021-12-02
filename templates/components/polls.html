@@ -3,7 +3,7 @@
         <div class="poll-header">
             <div class="user">
                 <img src="{{poll.creator.avatar.url}}" alt="Poll creator profile picture">
-                <a href="">@{{poll.creator}}</a>
+                <a href="{% url 'profile' poll.creator.id %}">@{{poll.creator}}</a>
             </div>
             <p class="poll-created-time">{{poll.created|timesince}} ago</p>
         </div>

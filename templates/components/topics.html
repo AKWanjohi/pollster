@@ -5,14 +5,14 @@
             <li {% if request.GET.q is None %}class="active"{% endif %}>
                 <a href="{{request.path}}">All <span>{{all_topics_count}}</span></a>
             </li>
-            {% for topic in topics %}
+            {% for topic in topics|slice:5 %}
                 <li {% if request.GET.q == topic.name %}class="active"{% endif %}>
                     <a href="{{request.path}}?q={{topic.name}}">{{topic.name}} <span>{{topic.question_set.all.count}}</span></a>
                 </li>
             {% endfor %}
         </ul>
         <div>
-            <a href="" class="more-button">More</a>
+            <a href="{% url 'topics' %}" class="more-button">More</a>
         </div>
     </div>
 </div>
