@@ -6,12 +6,19 @@
     <main class="poll-content">
         <div class="container">
             <div class="action-buttons">
+            {% if voted_poll %}
+                <a href="{% url 'home' %}" class="back-button">Back</a>
+            {% else %}
                 <a href="{{request.META.HTTP_REFERER}}" class="back-button">Back</a>
+            {% endif %}
             </div>
             <div class="poll">
                 <div class="poll-header">
-                    <a href="">@{{poll.creator}}</a>
-                    <p>{{poll.created|timesince}} ago</p>
+                    <div class="user">
+                        <img src="{{poll.creator.avatar.url}}" alt="Poll creator profile picture">
+                        <a href="">@{{poll.creator}}</a>
+                    </div>
+                    <p class="poll-created-time">{{poll.created|timesince}} ago</p>
                 </div>
                 <hr>
                 <div class="poll-body">
