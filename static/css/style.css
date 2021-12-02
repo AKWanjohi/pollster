@@ -208,6 +208,10 @@ button[type="submit"]:hover {
   align-items: center;
 }
 
+.poll-header {
+  flex-wrap: wrap;
+}
+
 .homepage-content .poll hr,
 .profile .poll hr {
   margin: 1.5rem 0;
@@ -287,6 +291,7 @@ button[type="submit"]:hover {
 }
 
 .poll-header .poll-created-time {
+  padding-top: 1rem;
   font-size: 1.4rem;
 }
 
