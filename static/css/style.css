@@ -640,7 +640,12 @@ a.login-link {
   }
 
   .mobile-layout {
+    display: block;
     margin-bottom: 2rem;
+  }
+
+  .search-form input {
+    min-width: 100%;
   }
 
   .mobile-buttons {
