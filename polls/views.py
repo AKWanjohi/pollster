@@ -171,3 +171,20 @@ def profile_edit(request, user_id):
     user = User.objects.get(pk=user_id)
     context = {'user': user}
     return render(request, 'profile_edit.html', context)
+
+def topics(request):
+    topics = Topic.objects.all()
+    all_topics_count = 0
+    for topic in topics:
+        all_topics_count += len(topic.question_set.all())
+    
+    context = {"topics": topics, "all_topics_count": all_topics_count}
+    return render(request, 'topics.html', context)
+
+
+def activities(request):
+    if request.user.is_authenticated:
+        voted_polls = QuestionVoter.objects.filter(voter=request.user)
+        return render(request, 'activities.html', {"voted_polls": voted_polls})
+        
+    return render(request, 'activities.html')

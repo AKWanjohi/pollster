@@ -22,6 +22,7 @@ body {
 .container {
   max-width: 1140px;
   margin: auto;
+  padding: 0 1rem;
 }
 
 main {
@@ -60,6 +61,10 @@ header ul {
 
 header ul li {
   padding: 0 1rem;
+}
+
+header ul li:last-child {
+  padding-right: 0;
 }
 
 header ul a {
@@ -222,7 +227,7 @@ button[type="submit"]:hover {
 
 .homepage-content .poll-topic,
 .profile .poll-topic {
-  padding: 0.5rem;
+  padding: 0.5rem 1rem;
   background-color: var(--accent-color);
   border-radius: 2rem;
   font-size: 1.5rem;
@@ -428,6 +433,15 @@ li.not-logged-in {
   color: #fff;
 }
 
+.topics-content .topics-list a {
+  font-weight: bold;
+  color: var(--accent-color);
+}
+
+.topics-content .topics-list a:hover {
+  color: var(--primary-color);
+}
+
 a.login-link {
   font-weight: bold;
   color: var(--accent-color);
@@ -569,4 +583,140 @@ a.login-link {
 
 .profile-edit h1 {
   color: var(--accent-color);
+}
+
+.mobile-layout {
+  display: none;
+}
+
+@media screen and (max-width: 1024px) {
+  .logo {
+    font-size: 2.8rem;
+  }
+
+  .search-form input {
+    min-width: 35rem;
+  }
+
+  .homepage-content .container,
+  .profile-content .container {
+    grid-template-columns: 1.5fr 3fr 1.5fr;
+  }
+
+  .topics h2,
+  .activities h2 {
+    font-size: 1.8rem;
+  }
+
+  .topics-list a {
+    font-size: 1.6rem;
+  }
+
+  .homepage-content .polls-title {
+    font-size: 1.8rem;
+  }
+
+  .homepage-content .polls-count {
+    font-size: 1.6rem;
+  }
+
+  .homepage-content .poll-create {
+    padding: 1rem 1.5rem;
+  }
+}
+
+@media screen and (max-width: 700px) {
+  .search-form,
+  .topics,
+  .activities {
+    display: none;
+  }
+
+  .mobile-layout .search-form,
+  .topics-content .search-form,
+  .topics-content .topics,
+  .activities-content .activities {
+    display: block;
+  }
+
+  .mobile-layout {
+    margin-bottom: 2rem;
+  }
+
+  .mobile-buttons {
+    margin-top: 1rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .mobile-buttons a {
+    padding: 0.8rem 1.5rem;
+    border: 0.2rem solid var(--accent-color);
+    border-radius: 5rem;
+    text-decoration: none;
+    color: var(--primary-color);
+  }
+
+  .mobile-buttons a:first-child {
+    margin-right: 1rem;
+  }
+
+  .activities-content a {
+    color: var(--accent-color);
+  }
+
+  .homepage-content .container,
+  .profile-content .container {
+    grid-template-columns: 1fr;
+  }
+
+  .logo {
+    font-size: 2.4rem;
+  }
+
+  header a {
+    font-size: 1.5rem;
+  }
+
+  .form-content .container > div {
+    margin: 1.5rem 1rem;
+    padding: 1rem;
+    min-width: 100%;
+  }
+
+  .form-content .container h1,
+  .create-poll h1 {
+    font-size: 2.6rem;
+  }
+
+  label {
+    font-size: 1.6rem;
+  }
+
+  .back-button {
+    padding: 0.8rem 1.5rem;
+  }
+
+  .homepage-content .poll {
+    padding: 2rem;
+  }
+
+  .homepage-content .poll a,
+  .profile .poll a {
+    font-size: 2rem;
+  }
+
+  .poll .user a {
+    font-size: 1.6rem;
+  }
+
+  .create-poll,
+  .profile-edit {
+    width: 100%;
+  }
+
+  .poll-content .poll-body {
+    font-size: 2rem;
+  }
 }

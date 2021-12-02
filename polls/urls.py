@@ -10,4 +10,6 @@ urlpatterns = [
     path('create-poll', views.create_poll, name='create-poll'),
     path('profile/<int:user_id>', views.profile, name='profile'),
     path('profile-edit/<int:user_id>', views.profile_edit, name='profile-edit'),
+    path('topics', views.topics, name='topics'),
+    path('activities', views.activities, name='activities')
 ]

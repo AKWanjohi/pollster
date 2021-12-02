@@ -5,6 +5,16 @@
 {% block content %}
     <main class="homepage-content">
         <div class="container">
+            <div class="mobile-layout">
+                <form action="{{request.path}}" class="search-form">
+                    <input type="search" name="q" value="{{request.GET.q}}" placeholder="Search for topics or polls...">
+                </form>
+                <div class="mobile-buttons">
+                    <a href="{% url 'topics' %}">Browse Topics</a>
+                    <a href="{% url 'activities' %}">Recent Activities</a>
+                </div>
+            </div>
+
             {% include 'components/topics.html' %}
 
             <div class="polls">

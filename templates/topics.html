@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+
+{% block title %}| Browse Topics{% endblock title %}
+
+{% block content %}
+<main class="topics-content">
+    <div class="container">
+        <div class="topics">
+            <h2>Browse Topics</h2>
+            <div class="topics-body">
+                <form action="{% url 'home' %}" class="search-form">
+                    <input type="search" name="q" placeholder="Search for topics...">
+                </form>
+                <ul class="topics-list">
+                    <li>
+                        <a href="{% url 'home' %}">All <span>{{all_topics_count}}</span></a>
+                    </li>
+                    {% for topic in topics %}
+                        <li>
+                            <a href="{% url 'home' %}?q={{topic.name}}">{{topic.name}} <span>{{topic.question_set.all.count}}</span></a>
+                        </li>
+                    {% endfor %}
+                </ul>
+            </div>
+        </div>
+    </div>
+</main>
+{% endblock content %}
