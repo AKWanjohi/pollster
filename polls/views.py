@@ -112,7 +112,7 @@ def create_poll(request):
     if request.method == "POST":
         poll_question = request.POST.get('poll_question')
         topic_name = request.POST.get('topic_name')
-        topic = Topic.objects.get(name=topic_name)
+        topic, created = Topic.objects.get_or_create(name=topic_name)
 
         poll_choices = []
         choices = request.POST.get('poll_choices')
