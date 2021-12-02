@@ -7,6 +7,7 @@ from .models import Choice, QuestionVoter, Topic, User, Question, QuestionVoter
 
 
 def home(request):
+    page = 'home'
     q = request.GET.get('q') if request.GET.get('q') != None else ""
 
     topics = Topic.objects.all()
@@ -33,10 +34,10 @@ def home(request):
         else:
             polls_count = 0
         context = {'topics': topics, 'polls': polls_list, 'voted_polls': voted_polls, 'all_polls': polls,
-                   'polls_count': polls_count, 'all_topics_count': all_topics_count}
+                   'polls_count': polls_count, 'all_topics_count': all_topics_count, 'page': page}
     else:
         context = {'topics': topics, 'polls': polls,
-                   'all_topics_count': all_topics_count}
+                   'all_topics_count': all_topics_count, 'page': page}
 
     return render(request, 'index.html', context)
 
@@ -135,6 +136,7 @@ def create_poll(request):
 
 @login_required(login_url='login')
 def profile(request, user_id):
+    page = 'profile'
     user = User.objects.get(pk=user_id)
 
     q = request.GET.get('q') if request.GET.get('q') != None else ""
@@ -152,7 +154,7 @@ def profile(request, user_id):
         all_topics_count += len(topic.question_set.all())
 
     context = {'user': user, 'topics': topics,
-               'polls': polls, 'voted_polls': voted_polls, 'all_topics_count': all_topics_count}
+               'polls': polls, 'voted_polls': voted_polls, 'all_topics_count': all_topics_count, 'page': page}
     return render(request, 'profile.html', context)
 
 

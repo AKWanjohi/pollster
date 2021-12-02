@@ -1,7 +1,14 @@
 <header>
     <div class="container">
         <a href="{% url 'home' %}" class="logo">Pollster</a>
-        <form action="{{request.path}}" class="search-form">
+        <form 
+            {% if page is 'profile' or page is 'home' %}
+                action="{{request.path}}" 
+            {% else %}
+                action="{% url 'home' %}" 
+            {% endif %}
+            class="search-form"
+        >
             <input type="search" name="q" value="{{request.GET.q}}" placeholder="Search for topics or polls...">
         </form>
         <nav>
