@@ -9,7 +9,10 @@ from .models import Choice, QuestionVoter, Topic, User, Question, QuestionVoter
 def home(request):
     q = request.GET.get('q') if request.GET.get('q') != None else ""
 
-    topics = Topic.objects.all()[:5]
+    topics = Topic.objects.all()
+    all_topics_count = 0
+    for topic in topics:
+        all_topics_count += len(topic.question_set.all())
 
     polls = Question.objects.filter(
         Q(topic__name__icontains=q) | Q(question_text__icontains=q))
@@ -30,9 +33,10 @@ def home(request):
         else:
             polls_count = 0
         context = {'topics': topics, 'polls': polls_list, 'voted_polls': voted_polls, 'all_polls': polls,
-                   'polls_count': polls_count}
+                   'polls_count': polls_count, 'all_topics_count': all_topics_count}
     else:
-        context = {'topics': topics, 'polls': polls}
+        context = {'topics': topics, 'polls': polls,
+                   'all_topics_count': all_topics_count}
 
     return render(request, 'index.html', context)
 
@@ -127,3 +131,43 @@ def create_poll(request):
         return redirect('home')
     topics = Topic.objects.all()
     return render(request, 'create_poll.html', {'topics': topics})
+
+
+@login_required(login_url='login')
+def profile(request, user_id):
+    user = User.objects.get(pk=user_id)
+
+    q = request.GET.get('q') if request.GET.get('q') != None else ""
+
+    if request.user.is_authenticated:
+        voted_polls = QuestionVoter.objects.filter(voter=request.user).filter(
+            Q(question__question_text__icontains=q) | Q(question__topic__name__icontains=q))
+
+    polls = Question.objects.filter(creator=user).filter(
+        Q(topic__name__icontains=q) | Q(question_text__icontains=q))
+
+    topics = Topic.objects.all()
+    all_topics_count = 0
+    for topic in topics:
+        all_topics_count += len(topic.question_set.all())
+
+    context = {'user': user, 'topics': topics,
+               'polls': polls, 'voted_polls': voted_polls, 'all_topics_count': all_topics_count}
+    return render(request, 'profile.html', context)
+
+
+@login_required(login_url='login')
+def profile_edit(request, user_id):
+    if request.method == "POST":
+        user_profile = User.objects.get(pk=user_id)
+        user_profile.first_name = request.POST.get('first_name')
+        user_profile.last_name = request.POST.get('last_name')
+        user_profile.username = request.POST.get('username')
+        user_profile.email = request.POST.get('email')
+        user_profile.bio = request.POST.get('bio')
+        user_profile.save()
+
+        return redirect(profile, user_id=user_profile.id)
+    user = User.objects.get(pk=user_id)
+    context = {'user': user}
+    return render(request, 'profile_edit.html', context)

@@ -1,12 +1,15 @@
 <header>
     <div class="container">
         <a href="{% url 'home' %}" class="logo">Pollster</a>
-        <form action="{% url 'home' %}" class="search-form">
+        <form action="{{request.path}}" class="search-form">
             <input type="search" name="q" placeholder="Search for topics or polls...">
         </form>
         <nav>
             <ul>
                 {% if request.user.is_authenticated %}
+                    <li>
+                        <a href="{% url 'profile' request.user.id %}">Profile</a>
+                    </li>
                     <li>
                         <a href="{% url 'logout' %}">Logout</a>
                     </li>

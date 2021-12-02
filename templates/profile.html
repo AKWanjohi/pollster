@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+
+{% block title %}| Profile{% endblock title %}
+
+{% block content %}
+    <main class="profile-content">
+        <div class="container">
+            {% include 'components/topics.html' %}
+
+            <div class="profile">
+                <div class="profile-header">
+                    <img src="{{user.avatar.url}}" alt="User profile image">
+                    <p class="user-name">{{user.first_name}} {{user.last_name}}</p>
+                    <p class="username">@{{user.username}}</p>
+                    {% if request.user.id is user.id %}
+                        <a href="{% url 'profile-edit' user.id %}" class="edit-profile">Edit Profile</a>
+                    {% endif %}
+                </div>
+                <div class="profile-body">
+                    <p class='profile-about-title'>About</p>
+                    <p class="profile-about">{{user.bio}}</p>
+                </div>
+                <div class="profile-content">
+                    <p class="profile-content-title">Poll Questions By {{user.first_name}} {{user.last_name}}</p>
+                </div>
+                {% if polls %}
+                    {% include 'components/polls.html' %}
+                {% else %}
+                    {% if request.GET.q %}
+                        <p class="no-polls">No polls available matching search parameter.</p>
+                    {% else %}
+                        <p class="no-polls">No polls available.</p>
+                    {% endif %}
+                {% endif %}
+            </div>
+
+            {% include 'components/activities.html' %}
+        </div>
+    </main>
+{% endblock content %}

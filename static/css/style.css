@@ -46,7 +46,7 @@ header .container {
 }
 
 header a {
-  font-size: 1.8rem;
+  font-size: 1.7rem;
   font-weight: bold;
   text-decoration: none;
   text-transform: uppercase;
@@ -70,12 +70,22 @@ header ul a:hover {
   border-bottom: 0.3rem solid;
 }
 
+.search-form {
+  padding: 0.5rem;
+  background-color: #fff;
+  border: 0.2rem solid var(--accent-color);
+  border-radius: 0.5rem;
+}
+
 .search-form input {
   margin: 0;
   min-width: 40rem;
   font-size: 1.5rem;
   border: none;
-  border-radius: 2rem;
+}
+
+.search-form input:focus {
+  outline: none;
 }
 
 /* Forms */
@@ -95,6 +105,7 @@ header ul a:hover {
 }
 
 .form-content .container h1 {
+  margin-top: 0;
   color: var(--primary-color);
 }
 
@@ -103,7 +114,7 @@ header ul a:hover {
 }
 
 label {
-  font-size: 1.8rem;
+  font-size: 1.7rem;
   font-weight: bold;
   text-transform: uppercase;
 }
@@ -113,6 +124,7 @@ textarea {
   margin-top: 0.5rem;
   padding: 0.5rem;
   width: 100%;
+  font-size: 1.5rem;
   line-height: 1.5;
 }
 
@@ -161,54 +173,64 @@ button[type="submit"]:hover {
 }
 
 /* Homepage */
-.homepage-content .container {
+.homepage-content .container,
+.profile-content .container {
   display: grid;
   grid-template-columns: 1fr 3fr 1fr;
   column-gap: 2rem;
 }
 
-.homepage-content .poll {
+.homepage-content .poll,
+.profile .poll {
   margin-bottom: 2rem;
   padding: 1rem;
-  border: 0.1rem solid var(--primary-color);
+  border: 0.1rem solid var(--accent-color);
   border-radius: 1rem;
   box-shadow: 0 0 0.5rem rgba(0, 0, 0, 0.2);
 }
 
-.homepage-content .poll a {
+.homepage-content .poll a,
+.profile .poll a {
   text-decoration: none;
 }
 
 .homepage-content .poll-header,
-.homepage-content .poll-footer {
+.homepage-content .poll-footer,
+.profile .poll-header,
+.profile .poll-footer {
   display: flex;
   justify-content: space-between;
   align-items: center;
 }
 
-.homepage-content .poll hr {
+.homepage-content .poll hr,
+.profile .poll hr {
   margin: 1.5rem 0;
 }
 
-.homepage-content .poll-body a {
+.homepage-content .poll-body a,
+.profile .poll-body a {
   font-size: 2.2rem;
   font-weight: bold;
   color: initial;
 }
 
-.homepage-content .poll-body a:hover {
+.homepage-content .poll-body a:hover,
+.profile .poll-body a:hover {
   color: var(--primary-color);
 }
 
-.homepage-content .poll-topic {
-  padding: 1rem;
-  background-color: #b046dd;
+.homepage-content .poll-topic,
+.profile .poll-topic {
+  padding: 0.5rem;
+  background-color: var(--accent-color);
   border-radius: 2rem;
-  font-weight: bold;
+  font-size: 1.5rem;
   color: #fff;
 }
 
-.homepage-content .polls-header {
+.homepage-content .polls-header,
+.profile .polls-header {
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -241,11 +263,37 @@ button[type="submit"]:hover {
   font-size: 1.8rem;
 }
 
-.homepage-content .no-polls {
+.homepage-content .no-polls,
+.profile .no-polls {
   padding: 1rem;
   border: 0.1rem solid #c2c2c2;
   border-radius: 0.5rem;
   box-shadow: 0 0 0.5rem rgba(0, 0, 0, 0.2);
+}
+
+.poll-footer i {
+  margin-right: 1rem;
+  color: var(--accent-color);
+}
+
+.poll-header .user {
+  display: flex;
+  align-items: center;
+}
+
+.poll-header .poll-created-time {
+  font-size: 1.4rem;
+}
+
+.poll-header img {
+  width: 4rem;
+  margin-right: 1rem;
+  border: 0.1rem solid var(--accent-color);
+  border-radius: 50%;
+}
+
+form i {
+  color: var(--primary-color);
 }
 
 /* Voting Page */
@@ -326,7 +374,6 @@ button[type="submit"]:hover {
 
 .topics-list,
 .activities-list {
-  margin-top: 1.5rem;
   list-style: none;
 }
 
@@ -391,6 +438,13 @@ a.login-link {
   color: var(--primary-color);
 }
 
+.activity-info {
+  padding-bottom: 1rem;
+  font-weight: bold;
+  border-bottom: 0.1rem solid;
+  color: var(--accent-color);
+}
+
 /* Poll Page */
 .action-buttons {
   margin-bottom: 1rem;
@@ -434,4 +488,85 @@ a.login-link {
 .create-poll h1 {
   margin-block: 0.5rem;
   color: var(--primary-color);
+}
+
+/* Profile Page */
+.profile {
+  padding: 1rem;
+  border: 0.1rem solid #c2c2c2;
+  border-radius: 0.5rem;
+  box-shadow: 0 0 0.5rem rgba(0, 0, 0, 0.2);
+}
+
+.profile-header {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.profile-header img {
+  padding: 0.2rem;
+  width: 10rem;
+  border: 0.2rem solid var(--primary-color);
+  border-radius: 50%;
+}
+
+.profile-header p {
+  margin-block: 0.5rem;
+}
+
+.user-name {
+  font-size: 2.4rem;
+  font-weight: bold;
+}
+
+.username {
+  font-size: 2rem;
+  color: var(--accent-color);
+}
+
+.edit-profile {
+  margin-top: 1rem;
+  padding: 1rem 2rem;
+  display: inline-block;
+  font-weight: bold;
+  text-decoration: none;
+  text-transform: none;
+  border: 0.2rem solid var(--accent-color);
+  border-radius: 5rem;
+  color: var(--accent-color);
+}
+
+.edit-profile:hover {
+  background-color: var(--primary-color);
+  border-color: var(--primary-color);
+  color: #fff;
+}
+
+.profile-about-title,
+.profile-content-title {
+  margin-block: 2rem;
+  font-weight: bold;
+  text-transform: uppercase;
+  color: var(--accent-color);
+}
+
+.profile-about {
+  font-size: 1.5rem;
+}
+
+/* Edit Profile Page */
+
+.profile-edit {
+  width: 60rem;
+  margin: auto;
+  padding: 1rem;
+  border: 0.1rem solid #c2c2c2;
+  border-radius: 0.5rem;
+  box-shadow: 0 0 0.5rem rgba(0, 0, 0, 0.2);
+}
+
+.profile-edit h1 {
+  color: var(--accent-color);
 }
