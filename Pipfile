@@ -5,8 +5,8 @@ name = "pypi"
 
 [packages]
 django = "*"
-mysqlclient = "*"
 pillow = "*"
+psycopg2 = "*"
 
 [dev-packages]
 autopep8 = "*"
